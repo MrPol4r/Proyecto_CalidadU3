@@ -12,9 +12,9 @@
   </coverage>
   <php>
     <server name="REQUEST_METHOD" value="GET"/>
-    <env name="DB_HOST" value="localhost"/>
-    <env name="DB_USER" value="root"/>
-    <env name="DB_PASS" value=""/>
+    <env name="DB_HOST" value="161.132.49.95"/>
+    <env name="DB_USER" value="escobar"/>
+    <env name="DB_PASS" value="Upt2024"/>
     <env name="DB_NAME" value="sis_venta_test"/>
   </php>
   <source>

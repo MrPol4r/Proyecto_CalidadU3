@@ -27,14 +27,10 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
 
-      - name: Install MariaDB client
-        run: sudo apt-get install -y mariadb-client
-
       - name: Check Database Connection
-        run: mysql --host 161.132.49.95 --port 3306 --user=escobar --password=Upt2024 --execute="SHOW DATABASES;"
-
-      - name: Set Execute Permission for PHPUnit
-        run: chmod +x vendor/bin/phpunit
+        run: |
+          sudo apt-get install -y mariadb-client
+          mysql --host 161.132.49.95 --port 3306 --user=escobar --password=Upt2024 --execute="SHOW DATABASES;"
 
       - name: Run tests
         run: vendor/bin/phpunit --configuration phpunit.xml --coverage-clover coverage.xml
@@ -47,3 +43,4 @@ jobs:
         with:
           name: coverage-report
           path: coverage-report/
+
