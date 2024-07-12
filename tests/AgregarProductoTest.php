@@ -3,7 +3,7 @@
 use PHPUnit\Framework\TestCase;
 
 // Incluir el archivo de la clase ProductoModelTest
-require_once __DIR__ . 'src\ProductoModelTest.php';
+require_once __DIR__ . '\src\ProductoModelTest.php';
 
 class AgregarProductoTest extends TestCase
 {
