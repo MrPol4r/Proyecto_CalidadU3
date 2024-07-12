@@ -1,5 +1,10 @@
 name: PHP CI
 
+env:
+  sonar.projectKey: MrPol4r_Proyecto_CalidadU3
+  sonar.organization: mrpolar
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  
 on:
   push:
     branches:
