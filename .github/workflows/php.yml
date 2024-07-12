@@ -31,10 +31,16 @@ jobs:
         run: |
           sudo apt-get install -y mariadb-client
           mysql --host 161.132.49.95 --port 3306 --user=escobar --password=Upt2024 --execute="SHOW DATABASES;"
+          
       - name: Set Execute Permission for PHPUnit
         run: chmod +x vendor/bin/phpunit
         
       - name: Run tests with coverage report
+        env:
+          DB_HOST: 161.132.49.95
+          DB_USER: escobar
+          DB_PASS: Upt2024
+          DB_NAME: sis_venta_test
         run: ./vendor/bin/phpunit --configuration phpunit.xml --coverage-html build/coverage
 
       - name: Upload Coverage Report
