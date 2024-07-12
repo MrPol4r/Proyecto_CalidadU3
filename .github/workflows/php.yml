@@ -22,7 +22,7 @@ jobs:
           php-version: '8.2'
           extensions: mbstring, xml, gd, pdo_mysql
           coverage: phpunit
-          tools: phpunit, composer
+          tools: phpunit, composer, phploc
 
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
@@ -43,8 +43,31 @@ jobs:
           DB_NAME: sis_venta_test
         run: ./vendor/bin/phpunit --configuration phpunit.xml --coverage-html build/coverage
 
+      - name: Generate Coverage Summary
+        run: |
+          ./vendor/bin/phpunit --coverage-text > coverage-summary.txt
+          ./vendor/bin/phploc src > phploc-report.txt
+
+      - name: Convert Coverage Summary to Markdown
+        run: |
+          echo '## Code Coverage Summary' > coverage-report.md
+          cat coverage-summary.txt >> coverage-report.md
+          echo '' >> coverage-report.md
+          echo '## PHPLoc Report' >> coverage-report.md
+          cat phploc-report.txt >> coverage-report.md
+
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v2
         with:
           name: coverage-report
           path: build/coverage/
+
+      - name: Upload Coverage Summary
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage-summary
+          path: coverage-report.md
+
+      - name: Post Coverage Summary to GitHub
+        run: cat coverage-report.md
+        shell: bash
