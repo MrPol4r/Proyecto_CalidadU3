@@ -6,9 +6,6 @@
     </testsuite>
   </testsuites>
   <coverage>
-    <include>
-      <directory suffix=".php">src</directory>
-    </include>
     <report>
       <html outputDirectory="build/coverage"/>
     </report>
@@ -20,4 +17,9 @@
     <env name="DB_PASS" value="Upt2024"/>
     <env name="DB_NAME" value="sis_venta_test"/>
   </php>
+  <source>
+    <include>
+      <directory suffix=".php">src</directory>
+    </include>
+  </source>
 </phpunit>
