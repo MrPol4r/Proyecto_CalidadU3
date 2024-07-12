@@ -33,10 +33,7 @@ jobs:
           mysql --host 161.132.49.95 --port 3306 --user=escobar --password=Upt2024 --execute="SHOW DATABASES;"
       - name: Set Execute Permission for PHPUnit
         run: chmod +x vendor/bin/phpunit
-
-      - name: Migrate PHPUnit Configuration
-        run: vendor/bin/phpunit --migrate-configuration
-
+        
       - name: Run tests with coverage report
         run: ./vendor/bin/phpunit --configuration phpunit.xml --coverage-html build/coverage
 
