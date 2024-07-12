@@ -27,18 +27,13 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
 
-      - name: Make PHPUnit executable
-        run: chmod +x vendor/bin/phpunit
+      - name: Check Database Connection
+        run: |
+          sudo apt-get install -y mariadb-client
+          mysql --host 161.132.49.95 --port 3306 --user ${{ secrets.DB_USER }} --password=${{ secrets.DB_PASSWORD }} --execute="SHOW DATABASES;"
 
       - name: Run tests
         run: vendor/bin/phpunit --configuration phpunit.xml --coverage-clover coverage.xml
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v2
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml
-          fail_ci_if_error: true
 
       - name: Generate Coverage Report
         run: php vendor/bin/phpcov merge --html=coverage-report coverage
@@ -48,3 +43,4 @@ jobs:
         with:
           name: coverage-report
           path: coverage-report/
+
