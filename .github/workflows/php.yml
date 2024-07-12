@@ -34,12 +34,9 @@ jobs:
 
       - name: Set Execute Permission for PHPUnit
         run: chmod +x vendor/bin/phpunit
-        
-      - name: Run tests
-        run: vendor/bin/phpunit --configuration phpunit.xml --coverage-clover coverage.xml
 
-      - name: Generate Coverage Report
-        run: php vendor/bin/phpcov merge --html=coverage-report coverage
+      - name: Run tests with coverage report
+        run: ./vendor/bin/phpunit --configuration phpunit.xml --coverage-html build/coverage
 
       - name: Upload Coverage Report
         uses: actions/upload-artifact@v2
